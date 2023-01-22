@@ -10,6 +10,7 @@ import (
 	"math"
 	"net"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"sync"
 	"time"
@@ -143,6 +144,20 @@ func transfer(jobs chan util.FileStream, taskBar *mpb.Bar, p *mpb.Progress, driv
 		} else {
 			file.LocalChecker.AddFile(file.ReadlPath)
 			logrus.Infof("[%v]上传成功", file.Name)
+			
+			    cmd := exec.Command("/bin/bash", "-c", `rm -rf file.ReadlPath`)
+			conf.Output.Infof("尝试删除%v", file.ReadlPath)
+			    //创建获取命令输出管道
+			    stdout, err := cmd.StdoutPipe()
+			    if err != nil {
+				return
+			    }
+
+			    //执行命令
+			    if err := cmd.Start(); err != nil {
+				return
+			    }
+			
 			successes++
 		}
 		taskBar.Increment()
