@@ -10,7 +10,6 @@ import (
 	"math"
 	"net"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"sync"
 	"time"
