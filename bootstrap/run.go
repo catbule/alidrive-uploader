@@ -145,6 +145,13 @@ func transfer(jobs chan util.FileStream, taskBar *mpb.Bar, p *mpb.Progress, driv
 			logrus.Infof("[%v]上传成功", file.Name)
 			
 			err := os.Remove(file.ReadlPath)
+			if err != nil {
+				//如果删除失败则输出 file remove Error!
+				
+			} else {
+				//如果删除成功则输出 file remove OK!
+				
+			}
 			
 			successes++
 		}
