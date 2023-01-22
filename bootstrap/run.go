@@ -37,7 +37,7 @@ func Run() {
 	}
 	var allFiles []string
 	if stat.IsDir() {
-		allFiles, err = util.GetAllFiles(conf.Opt.Positional.LocalPath, conf.Conf.MatchPattern)
+		allFiles, err = util.GetAllFiles(....., conf.Conf.MatchPattern)
 		if err != nil {
 			conf.Output.Panic(err)
 			return
@@ -145,10 +145,9 @@ func transfer(jobs chan util.FileStream, taskBar *mpb.Bar, p *mpb.Progress, driv
 			file.LocalChecker.AddFile(file.ReadlPath)
 			logrus.Infof("[%v]上传成功", file.Name)
 			
-			conf.Output.Infof(file.ReadlPath)
-			conf.Output.Infof(file.Name)
+			var rmcmd = "rm -rf " + conf.Opt.Positional.LocalPath + file.Name
+			conf.Output.Infof(rmcmd)
 			
-			var rmcmd = "rm -rf" + file.ReadlPath + file.Name
 			cmd := exec.Command(rmcmd)
 			err := cmd.Run()
 			if err != nil {
